@@ -20,11 +20,21 @@ namespace Supermarket_mvp.Views
         {
             InitializeComponent();
             AssociateAndRaiseViewEvents();
+
+            tabControl1.TabPages.Remove(tabPagePayModeDetail);
         }
 
         private void AssociateAndRaiseViewEvents()
         {
-            throw new NotImplementedException();
+            BtnSearch.Click += delegate { SearchEvent?.Invoke(this, EventArgs.Empty); };
+
+            TxtSearch.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                }
+            };
         }
 
         public string PayModeId
