@@ -299,8 +299,8 @@
             Controls.Add(panel1);
             IsMdiContainer = true;
             Name = "PayModeView";
+            SizeGripStyle = SizeGripStyle.Hide;
             Text = "Pay Mode Management";
-            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
