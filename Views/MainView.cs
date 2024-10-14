@@ -6,6 +6,7 @@
         {
             InitializeComponent();
             BtnPayMode.Click += delegate { ShowPayModeView?.Invoke(this, EventArgs.Empty); };
+            BtnProduct.Click += delegate { ShowProductView?.Invoke(this, EventArgs.Empty); };
 
             BtnExit.Click += delegate { this.Close(); };
         }
@@ -20,6 +21,14 @@
             payModeView.Show();
 
             BtnExit.Click += delegate { this.Close(); };
+        }
+
+        private void BtnProduct_Click(object sender, EventArgs e)
+        {
+                ProductView productView = new ProductView();
+                productView.Show();
+
+                BtnExit.Click += delegate { this.Close(); };            
         }
     }
 }
