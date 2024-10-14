@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Supermarket_mvp.Models;
 using Supermarket_mvp.Views;
-using Supermarket_mvp.Models;
 
 namespace Supermarket_mvp.Presenters
 {
@@ -45,7 +40,7 @@ namespace Supermarket_mvp.Presenters
 
         private void CancelAction(object? sender, EventArgs e)
         {
-           CleanViewFields();
+            CleanViewFields();
         }
 
         private void SavePayMode(object? sender, EventArgs e)
@@ -57,7 +52,7 @@ namespace Supermarket_mvp.Presenters
 
             try
             {
-                new Common.ModeIDataValidation().Validate(payMode);
+                new Common.ModelDataValidation().Validate(payMode);
                 if (view.IsEdit)
                 {
                     repository.Edit(payMode);
@@ -88,7 +83,22 @@ namespace Supermarket_mvp.Presenters
 
         private void DeleteSelectedPayMode(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Se recupera el objeto de la fila seleccionada del dataviewgrid
+                var payMode = (PayModeModel)payModeBindingSouce.Current;
+
+                // se invoca el metodo Delete del repositorio pasadole el ID del pay Mode
+                repository.Delete(payMode.Id);
+                view.IsSuccessful = true;
+                view.Message = "Pay Mode deleted successfully";
+                loadAllPayModeList();
+            }
+            catch (Exception ex)
+            {
+                view.IsSuccessful = false;
+                view.Message = "An error ocurred, could not delete pay mode";
+            }
         }
 
         private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
@@ -111,8 +121,8 @@ namespace Supermarket_mvp.Presenters
         {
             bool emptyValue = string.IsNullOrWhiteSpace(this.view.SearchValue);
             if (emptyValue = false)
-            { 
-              payModeList = repository.GetByValue(this.view.SearchValue);
+            {
+                payModeList = repository.GetByValue(this.view.SearchValue);
             }
             else
             {

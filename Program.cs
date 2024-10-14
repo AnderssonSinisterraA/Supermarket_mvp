@@ -1,9 +1,8 @@
-using Supermarket_mvp._Repositories;
-using Supermarket_mvp.Models;
 using Supermarket_mvp.Presenters;
 using Supermarket_mvp.Properties;
 using Supermarket_mvp.Views;
-using System.Windows.Forms;
+using Supermarket_mvp._Repositories;
+using System.Configuration;
 
 namespace Supermarket_mvp
 {
@@ -21,7 +20,7 @@ namespace Supermarket_mvp
             string sqlConnectionString = Settings.Default.SqlConnection;
             IMainView view = new MainView();
             new MainPresenter(view, sqlConnectionString);
-            Application.Run((Form) view);
+            Application.Run((Form)view);
         }
     }
 }

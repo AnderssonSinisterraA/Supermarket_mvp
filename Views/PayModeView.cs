@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Supermarket_mvp.Views
+﻿namespace Supermarket_mvp.Views
 {
     public partial class PayModeView : Form, IPayModeView
     {
@@ -38,7 +28,8 @@ namespace Supermarket_mvp.Views
                 }
             };
 
-            BtnNew.Click += delegate { 
+            BtnNew.Click += delegate
+            {
                 AddNewEvent?.Invoke(this, EventArgs.Empty);
 
                 tabControl1.TabPages.Remove(tabPagePayModeList);
@@ -46,7 +37,8 @@ namespace Supermarket_mvp.Views
                 tabPagePayModeDetail.Text = "Add New Pay Mode";
             };
 
-            BtnEdit.Click += delegate { 
+            BtnEdit.Click += delegate
+            {
                 EditEvent?.Invoke(this, EventArgs.Empty);
 
                 tabControl1.TabPages.Remove(tabPagePayModeList);
@@ -54,9 +46,10 @@ namespace Supermarket_mvp.Views
                 tabPagePayModeDetail.Text = "Edit Pay Mode";
             };
 
-            BtnDelete.Click += delegate { 
-                DeleteEvent?.Invoke(this, EventArgs.Empty); 
-            
+            BtnDelete.Click += delegate
+            {
+                DeleteEvent?.Invoke(this, EventArgs.Empty);
+
                 var result = MessageBox.Show(
                     "Are you sure you want to delete the selected Pay Mode",
                     "Warning",
@@ -69,9 +62,10 @@ namespace Supermarket_mvp.Views
                 }
             };
 
-            BtnSave.Click += delegate { 
-                SaveEvent?.Invoke(this, EventArgs.Empty); 
-            
+            BtnSave.Click += delegate
+            {
+                SaveEvent?.Invoke(this, EventArgs.Empty);
+
                 if (isSuccessful)
                 {
                     tabControl1.TabPages.Remove(tabPagePayModeDetail);
@@ -80,7 +74,8 @@ namespace Supermarket_mvp.Views
                 MessageBox.Show(Message);
             };
 
-            BtnCancel.Click += delegate { 
+            BtnCancel.Click += delegate
+            {
                 CancelEvent?.Invoke(this, EventArgs.Empty);
 
                 tabControl1.TabPages.Remove(tabPagePayModeDetail);
@@ -136,14 +131,14 @@ namespace Supermarket_mvp.Views
             DgPayMode.DataSource = payModeList;
         }
 
-        private static PayModeView instance;
+            private static PayModeView instance;
 
         public static PayModeView GetInstance(Form parentContainer)
         {
             if (instance == null || instance.IsDisposed)
             {
                 instance = new PayModeView();
-                instance.MdiParent = parentContainer;
+              //  instance.MdiParent = parentContainer; // parentContainer es el contenedor MDI
 
                 instance.FormBorderStyle = FormBorderStyle.None;
                 instance.Dock = DockStyle.Fill;
